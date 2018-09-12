@@ -1,15 +1,17 @@
 import {Component, EventEmitter, Output} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
 export class HeaderComponent {
+  constructor(private router: Router) {}
 
   @Output() navSelector = new EventEmitter<string>();
 
   onSelectClicked(selector: string) {
-    this.navSelector.emit(selector);
+    this.router.navigate(['/' + selector]);
   }
 
 }
