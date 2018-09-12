@@ -13,6 +13,8 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { DropdownDirective } from './shared/dropdown.directive';
 import {ShoppingListService} from './shopping-list/shopping-list.service';
 import {AppRoutingModule} from './app-routing.module';
+import { Src } from './src.app.recipies.recipe-detail-blank/src.app.recipies.recipe-detail-blank.component';
+import { RecipeDetailBlankComponent } from './src/app/recipies/recipe-detail-blank/recipe-detail-blank.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import {AppRoutingModule} from './app-routing.module';
     RecipeItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    DropdownDirective
+    DropdownDirective,
+    Src.App.Recipies.RecipeDetailBlankComponent,
+    RecipeDetailBlankComponent
   ],
   imports: [
     BrowserModule,
