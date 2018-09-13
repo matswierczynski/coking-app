@@ -13,8 +13,11 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { DropdownDirective } from './shared/dropdown.directive';
 import {ShoppingListService} from './shopping-list/shopping-list.service';
 import {AppRoutingModule} from './app-routing.module';
-import { Src } from './src.app.recipies.recipe-detail-blank/src.app.recipies.recipe-detail-blank.component';
-import { RecipeDetailBlankComponent } from './src/app/recipies/recipe-detail-blank/recipe-detail-blank.component';
+
+import {RecipeDetailResolverService} from './recipies/recipe-detail/recipe-detail-resolver.service';
+import {RecipeDetailBlankComponent} from './recipies/recipe-detail-blank/recipe-detail-blank.component';
+import {RecipeService} from './recipies/recipe.service';
+import { RecipeEditComponent } from './recipies/recipe-edit/recipe-edit.component';
 
 @NgModule({
   declarations: [
@@ -27,15 +30,15 @@ import { RecipeDetailBlankComponent } from './src/app/recipies/recipe-detail-bla
     ShoppingListComponent,
     ShoppingEditComponent,
     DropdownDirective,
-    Src.App.Recipies.RecipeDetailBlankComponent,
-    RecipeDetailBlankComponent
+    RecipeDetailBlankComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule
   ],
-  providers: [ShoppingListService],
+  providers: [ShoppingListService, RecipeDetailResolverService, RecipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
