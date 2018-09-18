@@ -20,11 +20,13 @@
             name="password"
             class="form-control"
             ngModel
-            minlength="5">
+            minlength="6"
+            required>
         </div>
         <button
           class="btn btn-primary"
-          type="submit">Sign Up</button>
+          type="submit"
+          [disabled]="!signUpForm.valid">Sign Up</button>
       </form>
     </div>
   </div>
