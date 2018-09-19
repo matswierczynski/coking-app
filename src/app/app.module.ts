@@ -11,7 +11,6 @@ import {RecipeService} from './recipies/recipe.service';
 import {DataStorageService} from './shared/data-storage.service';
 import {AuthService} from './auth/auth.service';
 import {AuthGuardService} from './auth/auth-guard.service';
-import {RecipesModule} from './recipies/recipes.module';
 import {SharedModule} from './shared/shared.module';
 import {ShoppingModule} from './shopping-list/shopping.module';
 import {AuthModule} from './auth/auth.module';
@@ -26,7 +25,6 @@ import { HomeComponent } from './home/home.component';
   imports: [
     BrowserModule,
     HttpModule,
-    RecipesModule,
     SharedModule,
     ShoppingModule,
     AuthModule,
