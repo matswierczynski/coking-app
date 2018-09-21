@@ -9,17 +9,12 @@ import {Params} from '@angular/router';
 @Injectable()
 export class DataStorageService {
   constructor(private httpClient: HttpClient,
-              private recipeService: RecipeService,
-              private authService: AuthService) {}
+              private recipeService: RecipeService) {}
 
   storeRecipes() {
-    const token = this.authService.getToken();
     return this.httpClient.put(
       'https://cooking-app-5b5c2.firebaseio.com/recipes.json',
-      this.recipeService.getRecipes(), {
-        observe: 'events',
-        params: new HttpParams().set('auth', token)
-      });
+      this.recipeService.getRecipes());
     // const req = new HttpRequest('PUT', 'https://cooking-app-5b5c2.firebaseio.com/recipes.json',
     //   this.recipeService.getRecipes(), {
     //     reportProgress: true,
@@ -28,11 +23,7 @@ export class DataStorageService {
   }
 
   getRecipes() {
-    const token = this.authService.getToken();
-
-    return this.httpClient.get<Recipe[]>('https://cooking-app-5b5c2.firebaseio.com/recipes.json' , {
-      params: new HttpParams().set('auth', token)
-    })
+    return this.httpClient.get<Recipe[]>('https://cooking-app-5b5c2.firebaseio.com/recipes.json')
       .pipe(map(
         (recipes) => {
           for (const recipe of recipes) {
