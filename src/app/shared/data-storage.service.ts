@@ -2,9 +2,7 @@ import {Injectable} from '@angular/core';
 import {RecipeService} from '../recipies/recipe.service';
 import {map} from 'rxjs/operators';
 import {Recipe} from '../recipies/recipe.model';
-import {AuthService} from '../auth/auth.service';
-import {HttpClient, HttpParams, HttpRequest} from '@angular/common/http';
-import {Params} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class DataStorageService {
@@ -15,11 +13,6 @@ export class DataStorageService {
     return this.httpClient.put(
       'https://cooking-app-5b5c2.firebaseio.com/recipes.json',
       this.recipeService.getRecipes());
-    // const req = new HttpRequest('PUT', 'https://cooking-app-5b5c2.firebaseio.com/recipes.json',
-    //   this.recipeService.getRecipes(), {
-    //     reportProgress: true,
-    //     params: new HttpParams().set('auth', token)});
-    // return this.httpClient.request(req); for custom HttpRequest
   }
 
   getRecipes() {
