@@ -1,18 +1,25 @@
 import {Injectable} from '@angular/core';
-import {RecipeService} from '../recipies/recipe.service';
-import {map} from 'rxjs/operators';
+import {map, take, tap} from 'rxjs/operators';
 import {Recipe} from '../recipies/recipe.model';
 import {HttpClient} from '@angular/common/http';
+import {Store} from '@ngrx/store';
+import * as fromRecipe from '../recipies/store/recipe.reducers';
+import * as RecipeActions from '../recipies/store/recipe.actions';
 
 @Injectable()
 export class DataStorageService {
   constructor(private httpClient: HttpClient,
-              private recipeService: RecipeService) {}
+              private store: Store<fromRecipe.FeatureState>) {}
 
   storeRecipes() {
-    return this.httpClient.put(
-      'https://cooking-app-5b5c2.firebaseio.com/recipes.json',
-      this.recipeService.getRecipes());
+    return this.store.select('recipes')
+      .pipe(take(1))
+      .subscribe( (recipeState: fromRecipe.State) => {
+      const recipes = recipeState.recipes;
+      return this.httpClient.put(
+        'https://cooking-app-5b5c2.firebaseio.com/recipes.json',
+        recipes).subscribe();
+    });
   }
 
   getRecipes() {
@@ -29,7 +36,7 @@ export class DataStorageService {
         }
       ))
       .subscribe((recipes: Recipe[]) => {
-        this.recipeService.setRecipes(recipes);
+        this.store.dispatch(new RecipeActions.SetRecipes(recipes));
       });
   }
 }
