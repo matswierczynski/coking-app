@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Recipe } from '../../recipe.model';
-import {RecipeService} from '../../recipe.service';
+import * as fromRecipe from '../../store/recipe.reducers';
+import {Observable} from 'rxjs';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-recipe-item',
@@ -9,11 +10,11 @@ import {RecipeService} from '../../recipe.service';
   styleUrls: ['./recipe-item.component.css']
 })
 export class RecipeItemComponent implements OnInit {
-  recipe: Recipe;
+  recipeState: Observable<fromRecipe.State>;
   @Input() index: number;
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(private store: Store<fromRecipe.FeatureState>) {}
   ngOnInit() {
-    this.recipe = this.recipeService.getRecipe(this.index);
+    this.recipeState = this.store.select('recipes');
   }
 }
